@@ -93,6 +93,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    background: radial-gradient(circle, rgba(0,123,175,1) 0%, #005e85 100%);
 }
 
 a {
