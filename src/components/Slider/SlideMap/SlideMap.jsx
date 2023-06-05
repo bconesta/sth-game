@@ -38,6 +38,7 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
     if(e.target.id){
       dispatch({type: 'select-by-id', payload: {id: e.target.id}});
       handleSelectedChars([Number(e.target.id)]);
+      setMouse(true);
     }
   }
 
@@ -45,7 +46,7 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
     if(e.target.id === '' && !mouse) return;
     const xOffstet = canvasRef.current.getBoundingClientRect().left;
     const yOffstet = canvasRef.current.getBoundingClientRect().top;
-    const corX = e.type.includes("mouse") ? e.pageX : e.changedTouches[0].pageX-xOffstet;
+    const corX = (e.type.includes("mouse") ? e.pageX : e.changedTouches[0].pageX)-xOffstet;
     const corY = (e.type.includes("mouse") ? e.pageY : e.changedTouches[0].pageY)-yOffstet;
     const ctx = cleanCanvas();
     //Create lines between already selected chars
@@ -77,7 +78,7 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
   const end = e => {
     handleSelectedChars([])
     dispatch({type: 'unselect-all'});
-    //setMouse(false);
+    setMouse(false);
     //props.handleChange(false);
     //props.handleEnd(true);
   }
@@ -101,9 +102,10 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
       onTouchMove={move} 
       onTouchEnd={end} 
       onTouchCancel={end}
-      //onMouseDown={start}
-      //onMouseMove={move}
-      //onMouseUp={end}
+      onMouseDown={start}
+      onMouseMove={move}
+      onMouseUp={end}
+      onMouseCancel={end}
     >
         <canvas 
           ref={canvasRef} 

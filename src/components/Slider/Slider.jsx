@@ -24,10 +24,9 @@ function reducer(state, action){
 }
 
 function Slider({ lettersArray, handleAnswer, answer, settings }) {
-    const charSize = 60;
     const rad = settings.width/2;
 
-    const [chars, dispatch] = useReducer(reducer, [{size: charSize}]);
+    const [chars, dispatch] = useReducer(reducer, [{size: settings.charSize}]);
 
     useEffect(()=>{
         const charsAux = lettersArray.map((letter, i)=>{
@@ -36,7 +35,7 @@ function Slider({ lettersArray, handleAnswer, answer, settings }) {
             letter: letter,
             x: Math.round(rad*(Math.sin((2*Math.PI/lettersArray.length)*i)+1)),
             y: Math.round(rad*(-Math.cos((2*Math.PI/lettersArray.length)*i)+1)),
-            size: charSize,
+            size: settings.charSize,
             selected: false
           }
         });

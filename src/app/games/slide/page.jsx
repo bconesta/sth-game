@@ -13,13 +13,13 @@ export default function SlideGame() {
   const handleAnswer = (answer) => setAnswer(answer);
 
   const WHRatio = window.innerWidth/window.innerHeight;
-  const width = WHRatio > 1 ? window.innerHeight*0.3 : window.innerHeight*0.3;
+  const width = WHRatio > 1 ? window.innerHeight*0.28 : window.innerHeight*0.28;
 
   const sliderSettings = {
     width : width,
     lineColor : '#a1ffa1',
-    rad : WHRatio > 1 ? 300 : 200,
-    charSize : width*0.1,
+    //rad : WHRatio > 1 ? 300 : 200,
+    charSize : width*0.22,
     charColor : '#000',
     charBgColor : '#fff',
     charBgColorSelected : '#a1ffa1'
@@ -31,10 +31,12 @@ export default function SlideGame() {
 
   return (
     <div className={styles.container}>
-        <div className={styles.questionBox}>
-          
+        <div className={styles.questionContainer}>
+          <p>
+            {queNumber+1}. What is the next letter in the sequence?
+          </p>
         </div>
-        <div className={styles.answerBox}>
+        <div className={styles.answerContainer}>
           {lettersArray.map((letter, i)=>{
             return(
               <div key={letter+i} className={styles.answerChar}>
@@ -43,7 +45,7 @@ export default function SlideGame() {
             )
           })}
         </div>
-        <div className={styles.slideBox}>
+        <div className={styles.slideContainer}>
           <Slider 
             lettersArray={lettersArray}
             handleAnswer={handleAnswer}
