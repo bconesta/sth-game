@@ -13,7 +13,7 @@ export default function SlideGame() {
   const handleAnswer = (answer) => setAnswer(answer);
 
   const WHRatio = window.innerWidth/window.innerHeight;
-  const width = WHRatio > 1 ? window.innerHeight*0.28 : window.innerHeight*0.28;
+  const width = WHRatio > 1 ? window.innerHeight*0.26 : window.innerHeight*0.26;
 
   const sliderSettings = {
     width : width,
@@ -31,6 +31,9 @@ export default function SlideGame() {
 
   return (
     <div className={styles.container}>
+        <header>
+          <h3>Question {queNumber+1}/{5}</h3>
+        </header>
         <div className={styles.questionContainer}>
           <p>
             {queNumber+1}. What is the next letter in the sequence?

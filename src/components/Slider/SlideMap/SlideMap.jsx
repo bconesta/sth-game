@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineColor, children, handleSelectedChars, selectedChars }) {
   
-  const [mouse, setMouse] = useState(false);
-  
   const canvasRef = useRef(null);
 
   const styles = {
@@ -38,12 +36,11 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
     if(e.target.id){
       dispatch({type: 'select-by-id', payload: {id: e.target.id}});
       handleSelectedChars([Number(e.target.id)]);
-      setMouse(true);
     }
   }
 
   const move = e => {
-    if(e.target.id === '' && !mouse) return;
+    if(e.target.id === '' && e.buttons===0 || e.buttons===0) return;
     const xOffstet = canvasRef.current.getBoundingClientRect().left;
     const yOffstet = canvasRef.current.getBoundingClientRect().top;
     const corX = (e.type.includes("mouse") ? e.pageX : e.changedTouches[0].pageX)-xOffstet;
@@ -65,7 +62,7 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
       lettersArray.forEach(char=>{
         //Conditions to add char to selectedChars
         const isNotSelected = !selectedChars.includes(char.id);
-        const isMouseClicked = (e.type.includes("mouse") && mouse) || !e.type.includes("mouse");
+        const isMouseClicked = (e.type.includes("mouse") && e.buttons) || !e.type.includes("mouse");
         const isOverChar = (corX < char.x+char.size && corX > char.x) && (corY < char.y+char.size && corY > char.y);
         if(isNotSelected && isOverChar && isMouseClicked){
           handleSelectedChars([...selectedChars, char.id]);
@@ -78,23 +75,11 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
   const end = e => {
     handleSelectedChars([])
     dispatch({type: 'unselect-all'});
-    setMouse(false);
-    //props.handleChange(false);
-    //props.handleEnd(true);
   }
   
   useEffect(()=>{
     if(selectedChars.join("") === "") cleanCanvas();
   }, [selectedChars])
-
-  /*
-  useEffect(()=>{
-    setSelectedChars([])
-  }, [props.queNumber])*/
-
-  /*useEffect(()=>{
-    move(props.move)
-  }, [props.move])*/
 
   return (
     <div
@@ -105,7 +90,6 @@ export default function SlideMap({ dispatch, rad, lettersArray, lineWidth, lineC
       onMouseDown={start}
       onMouseMove={move}
       onMouseUp={end}
-      onMouseCancel={end}
     >
         <canvas 
           ref={canvasRef} 
