@@ -12,8 +12,10 @@ export default function SlideGame() {
   const [answer, setAnswer] = useState([]);
   const handleAnswer = (answer) => setAnswer(answer);
 
-  const WHRatio = window.innerWidth/window.innerHeight;
-  const width = WHRatio > 1 ? window.innerHeight*0.26 : window.innerHeight*0.26;
+  const [width, setWidth] = useState(0);
+
+  //const WHRatio = window.innerWidth/window.innerHeight;
+  //const width = WHRatio > 1 ? window.innerHeight*0.26 : window.innerHeight*0.26;
 
   const sliderSettings = {
     width : width,
@@ -26,7 +28,8 @@ export default function SlideGame() {
   };
 
   useEffect(()=>{
-    setLettersArray(['A','B','C','D','E','F','G', 'H'])
+    setLettersArray(['A','B','C','D','E','F','G', 'H']);
+    setWidth(window.innerHeight*0.26)
   },[]);
 
   return (
