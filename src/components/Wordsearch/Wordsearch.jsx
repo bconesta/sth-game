@@ -40,7 +40,7 @@ function reducer(state, action) {
 
 function Wordsearch({ table, settings }) {
 
-    const [chars, dispatch] = useReducer(reducer, [{ size: settings.charSize }]);
+    const [chars, dispatch] = useReducer(reducer, [[{ size: settings.charSize }]]);
 
     const styles = {
         container : {
