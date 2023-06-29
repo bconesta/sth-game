@@ -1,6 +1,6 @@
 import WordsTable from './WordsTable/WordsTable'
 import WordsMap from './WordsMap/WordsMap'
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -38,7 +38,7 @@ function reducer(state, action) {
 }
 
 
-function Wordsearch({ table, settings }) {
+function Wordsearch({ table, settings, handleCount, answers }) {
 
     const [chars, dispatch] = useReducer(reducer, [[{ size: settings.charSize }]]);
 
@@ -72,6 +72,8 @@ function Wordsearch({ table, settings }) {
                 settings={settings}
                 chars={chars}
                 dispatch={dispatch}
+                answers={answers}
+                handleCount={handleCount}
             >
                 <WordsTable table={table} settings={settings} />
             </WordsMap>

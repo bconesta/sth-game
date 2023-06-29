@@ -10,16 +10,26 @@ export default function WordSearchGame() {
 
     const ratio = width / height;
 
+    const [count, setCount] = useState(0);
+    const handleCount = () => { setCount(count+1) }
+
     const table = [
-        ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-        ['H', 'I', 'J', 'K', 'L', 'M', 'N'],
-        ['O', 'P', 'Q', 'R', 'S', 'T', 'U'],
-        ['V', 'W', 'X', 'Y', 'Z', 'A', 'B'],
-        ['C', 'D', 'E', 'F', 'G', 'H', 'I'],
-        ['J', 'K', 'L', 'M', 'N', 'O', 'P'],
-        ['Q', 'R', 'S', 'T', 'U', 'V', 'W'],
-        ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-        ['H', 'I', 'J', 'K', 'L', 'M', 'N']
+        ['E', 'B', 'C', 'D', 'E', 'F', 'G'],
+        ['F', 'A', 'P', 'P', 'B', 'N', 'A'],
+        ['E', 'P', 'Q', 'R', 'C', 'T', 'U'],
+        ['C', 'W', 'X', 'Y', 'R', 'A', 'B'],
+        ['T', 'A', 'R', 'J', 'E', 'T', 'A'],
+        ['I', 'K', 'L', 'M', 'D', 'O', 'P'],
+        ['V', 'R', 'S', 'T', 'I', 'V', 'W'],
+        ['O', 'B', 'C', 'D', 'T', 'F', 'G'],
+        ['H', 'I', 'J', 'K', 'O', 'M', 'N']
+    ]
+
+    const answers = [
+        'EFECTIVO',
+        'TARJETA',
+        'CREDITO',
+        'APPBNA'
     ]
 
     const settings = {
@@ -35,7 +45,15 @@ export default function WordSearchGame() {
 
     return (
         <div>
-            <Wordsearch table={table} settings={settings} />
+            <h1 className={styles.title}>Wordsearch</h1>
+            <h2 className={styles.subtitle}>Encuentra las palabras</h2>
+            <h3>{count}</h3>
+            <Wordsearch 
+                table={table}
+                answers={answers}
+                settings={settings} 
+                handleCount={handleCount}
+            />
         </div>
     )
 }
