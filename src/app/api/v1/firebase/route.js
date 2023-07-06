@@ -11,9 +11,7 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-
-console.log(app)
+const app = initializeApp(firebaseConfig)
 
 export function GET(){
     return NextResponse.json({ message: "Hello World"})
